@@ -23,6 +23,13 @@ local function DropDownButton_OnClick(self)
 	if selectedDriverIndex ~= GetDriverIndex() then
 		UIDropDownMenu_SetSelectedValue(DropDown, selectedDriverIndex)
 		SetDriverIndex(selectedDriverIndex) -- The call to SetCVar automatically updates the data object's text
+		-- For now, hardcode to my devices.  Extend this later to save a value for any of the devices?
+		local driverName = Sound_GameSystem_GetOutputDriverNameByIndex(selectedDriverIndex)
+		if string.find(driverName, 'HyperX QuadCast S') then
+			SetCVar("Sound_MasterVolume", .25)
+		elseif string.find(driverName, "HyperX Cloud Alpha Wireless") then
+			SetCVar("Sound_MasterVolume", .1)
+		end
 	end
 end
 
